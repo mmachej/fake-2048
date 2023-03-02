@@ -1,0 +1,27 @@
+.body {
+    background-color: darkgray;
+}
+
+.board {
+    width: 400px;
+    height: 400px;
+    border: 2px solid darkgrey;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    background-color: lightgray;
+}
+
+.board div {
+    width: 98px;
+    height: 98px;
+    border: 1px solid darkgrey;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+}
+
+
