@@ -24,4 +24,15 @@
     border-radius: 5px;
 }
 
+#message-board {
+    width: 400px;
+    height: 100px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 35px;
+    display: flex;
+    color: blue;
+    justify-content: center;
+    align-items: center;
+}
+
 

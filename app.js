@@ -1,12 +1,12 @@
 document.addEventListener('DOMContentLoaded',() =>{
 
 const squares = Array.from(document.querySelectorAll('.board div'));
+const messageDisplay = document.querySelector('#message-board')
 const width = 4;
 const colors = ['rgb(255, 0, 255)', 'rgb(200, 0, 255)', 'rgb(150, 0, 255)', 'rgb(100, 0, 255)','rgb(0, 0, 255)', 'rgb(0, 100, 255)', 'rgb(0, 200, 255)', 'rgb(0, 255, 200)', 'rgb(0, 255, 150)', 'rgb(0, 255, 80)', 'rgb(0, 255, 0)']
 const numbers = ['2', '4', '8', '16', '32', '64', '128', '256', '512', '1024', '2048']
 
 let isGameWon = false
-
 
 function generateRandomSquare() {
     let randomSquare = squares[Math.floor(Math.random()*squares.length)]
@@ -16,7 +16,6 @@ function generateRandomSquare() {
     randomSquare.innerHTML = numbers[0];
     randomSquare.style.backgroundColor = colors[0];
     randomSquare.classList.add('taken');
-
 }
 
 function switchSquare(newSquare, square) {
@@ -24,7 +23,7 @@ function switchSquare(newSquare, square) {
     newSquare.innerHTML = square.innerHTML
     newSquare.style.backgroundColor = square.style.backgroundColor
     square.innerHTML = null 
-    square.style.backgroundColor =null
+    square.style.backgroundColor = null
     square.classList.remove('taken')
 }
 
@@ -52,7 +51,7 @@ function moveLeft() {
                     let newSquare = emptySquares.shift();
                     switchSquare(newSquare, squares[i+j]);
                     emptySquares.push(squares[i+j]);
-                    takenSquares.push(newSquare); //change
+                    takenSquares.push(newSquare);
                 } else {
                     takenSquares.push(squares[i+j]);
                 }
@@ -78,7 +77,7 @@ function moveRight() {
                     let newSquare = emptySquares.shift();
                     switchSquare(newSquare, squares[i+j]);
                     emptySquares.push(squares[i+j]);
-                    takenSquares.push(newSquare); //change
+                    takenSquares.push(newSquare);
                 } else {
                     takenSquares.push(squares[i+j]);
                 }
@@ -90,8 +89,6 @@ function moveRight() {
 
 function moveUp() {
     for (let i = 0; i < width; i++) {
-        console.log('counting') // test
-        console.log(i) // test
         let emptySquares = [];
         let takenSquares = [];
         for (let j = 0; j < squares.length; j += width) {
@@ -106,7 +103,7 @@ function moveUp() {
                     let newSquare = emptySquares.shift();
                     switchSquare(newSquare, squares[i+j]);
                     emptySquares.push(squares[i+j]);
-                    takenSquares.push(newSquare); //change
+                    takenSquares.push(newSquare);
                 } else {
                     takenSquares.push(squares[i+j]);
                 }
@@ -131,7 +128,7 @@ function moveDown() {
                     let newSquare = emptySquares.shift();
                     switchSquare(newSquare, squares[j-i]);
                     emptySquares.push(squares[j-i]);
-                    takenSquares.push(newSquare); //change
+                    takenSquares.push(newSquare);
                 } else {
                     takenSquares.push(squares[j-i]);
                 }
@@ -140,13 +137,13 @@ function moveDown() {
     }
 }
 
+//change display method
 function gameOver() {
-    console.log('koniec')
     document.removeEventListener('keyup', control)
     if (isGameWon)  {
-        console.log("CONGRATRULATION")
+        messageDisplay.innerHTML = "CONGRATULATION!"
     } else {
-           console.log("GAME OVER")
+        messageDisplay.innerHTML = "GAME OVER"
     }
 }
 
@@ -164,9 +161,7 @@ function control(e) {
    if (squares.some(square => square.innerHTML === '2048')) {
         isGameWon = true
         gameOver()
-        //czemu to nie działa ????????    
-   } else if (squares.forEach(square => square.classList.contains('taken'))) {
-        console.log('here')
+   } else if (squares.every(square => square.classList.contains('taken'))) {
         gameOver()
    } else {
         generateRandomSquare();
